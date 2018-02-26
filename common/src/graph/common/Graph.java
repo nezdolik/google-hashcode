@@ -1,9 +1,13 @@
-package graph;
+package graph.common;
 
+import graph.common.Edge;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
  * Created by nezdolik on 2018-02-16.
@@ -25,8 +29,16 @@ public class Graph {
         return graph.get(vertex);
     }
 
-    public int V(){
+    public int N(){
         return graph.size();
+    }
+
+    public Collection<Edge> E(){
+        return graph.values().stream().flatMap(List::stream).collect(Collectors.toList());
+    }
+
+    public Collection<Integer> V(){
+        return graph.keySet();
     }
 
     private void initGraph(final int[] graphDef){

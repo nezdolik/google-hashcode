@@ -1,18 +1,15 @@
-package graph;
+package graph.mst;
 
+import graph.common.Edge;
+import graph.common.Graph;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Map;
 import java.util.PriorityQueue;
 import java.util.Queue;
 import java.util.Set;
 
-class PrimMST{
-
-
-
+class PrimMST {
 
     public static List<Edge> runMST(Graph graph, Integer source){
       if (!graph.containsVertex(source)){
@@ -23,15 +20,15 @@ class PrimMST{
       List<Edge> mst = new ArrayList<>();
       visited.add(source);
       toProcess.addAll(graph.getEdges(source));
-      while (visited.size() < graph.V()){
+      while (visited.size() < graph.N()){
             final Edge minEdge = toProcess.poll();
             mst.add(minEdge);
-            for (Edge e : graph.getEdges(minEdge.to)){
-                if (e.to != minEdge.from){
+            for (Edge e : graph.getEdges(minEdge.to())){
+                if (e.to() != minEdge.from()){
                     toProcess.add(e);
                 }
             }
-            visited.add(minEdge.to);
+            visited.add(minEdge.to());
       }
 
       return mst;
